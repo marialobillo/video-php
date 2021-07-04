@@ -27,6 +27,15 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        parent::boot();
+
+        Event::listen('video.watched', function ($user, $video_id) {
+            \Newsletter::addTags(['Video-' . $video_id], $user->email);
+        });
+
+        Event::listen('order.placed', function ($order) {
+            \Newsletter::subscribe($order->user->email);
+            \Newsletter::addTags([$order->plan->name], $order->user->email);
+        });
     }
 }
