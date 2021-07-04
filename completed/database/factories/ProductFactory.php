@@ -1,10 +1,10 @@
 <?php
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Product;
+use App\Models\Product;
 use Faker\Generator as Faker;
 
-$factory->define(App\Product::class, function (Faker $faker) {
+$factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'price' => $faker->randomFloat(2, 1, 100),
@@ -12,10 +12,10 @@ $factory->define(App\Product::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(App\Product::class, 'starter', [
-   'id' => App\Product::STARTER,
+$factory->state(Product::class, 'starter', [
+   'id' => Product::STARTER,
 ]);
 
-$factory->state(App\Product::class, 'master', [
-    'id' => App\Product::MASTER,
+$factory->state(Product::class, 'master', [
+    'id' => Product::MASTER,
 ]);

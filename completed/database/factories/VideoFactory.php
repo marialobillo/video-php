@@ -2,7 +2,8 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Video;
+use App\Models\Video;
+use App\Models\Lesson;
 use Faker\Generator as Faker;
 
 $factory->define(Video::class, function (Faker $faker) {
@@ -13,7 +14,7 @@ $factory->define(Video::class, function (Faker $faker) {
         'vimeo_id' => $faker->md5,
         'ordinal' => $faker->randomDigitNotNull,
         'lesson_id' => function () {
-            return factory(App\Lesson::class)->create()->id;
+            return factory(Lesson::class)->create()->id;
         },
     ];
 });

@@ -2,10 +2,11 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Model;
+use App\Models;
+use App\Models\Coupon;
 use Faker\Generator as Faker;
 
-$factory->define(\App\Coupon::class, function (Faker $faker) {
+$factory->define(Coupon::class, function (Faker $faker) {
     return [
         'code' => $faker->md5,
         'percent_off' => $faker->numberBetween(1, 100),
@@ -13,6 +14,6 @@ $factory->define(\App\Coupon::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(\App\Coupon::class, 'expired', [
+$factory->state(Coupon::class, 'expired', [
     'expired_at' => now()
 ]);
