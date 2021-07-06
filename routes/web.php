@@ -39,3 +39,7 @@ Route::get('promotions/{code}', 'CouponsController@show');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

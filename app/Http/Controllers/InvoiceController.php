@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateInvoiceRequest;
-use App\Order;
+use App\Models\Order;
 
 class InvoiceController extends Controller
 {
