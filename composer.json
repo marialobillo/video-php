@@ -12,6 +12,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.3",
         "spatie/laravel-newsletter": "^4.10",
         "stripe/stripe-php": "^7.87",
         "vimeo/laravel": "^5.6"

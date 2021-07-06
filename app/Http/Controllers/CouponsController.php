@@ -46,7 +46,12 @@ class CouponsController extends Controller
      */
     public function show(Coupon $coupon)
     {
-        //
+        $coupon = Coupon::where('code', $code)->whereNull('expired_at')->first();
+        if ($coupon && !$coupon->wasAlreadyUsed($request->user())) {
+            $request->session()->put('coupon_id', $coupon->id);
+        }
+
+        return redirect('/#buy-now');
     }
 
     /**
