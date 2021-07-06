@@ -46,40 +46,25 @@ class VideosController extends Controller
      */
     public function show(Video $video)
     {
-        //
+        $now_playing = Video::findOrFail($id);
+        $user = $request->user();
+
+        $this->ensureUserCanViewVideo($user, $now_playing);
+
+        $user->last_viewed_video_id = $id;
+        $user->save();
+
+        return view('videos.show', compact('now_playing'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Video $video)
-    {
-        //
-    }
+    
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Video $video)
+    private function ensureUserCanViewVideo($user, $video)
     {
-        //
-    }
+        if ($video->lesson->isFree() || $video->lesson->product_id <= $user->order->product_id) {
+            return;
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Video $video)
-    {
-        //
+        abort(403);
     }
 }
