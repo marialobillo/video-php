@@ -25,5 +25,6 @@ class LoginControllerTest extends TestCase
         ]);
 
         $response->assertRedirect('/dashboard');
+        $this->assertAuthenticatedAs($user);
     }
 }
