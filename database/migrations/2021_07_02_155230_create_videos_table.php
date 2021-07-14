@@ -23,8 +23,8 @@ class CreateVideosTable extends Migration
             $table->bigInteger('lesson_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('lesson_id')->references('id')
-                        ->on('lessons')->onDelete('cascade');
+            // $table->foreign('lesson_id')->references('id')
+            //             ->on('lessons')->onDelete('cascade');
         });
     }
 

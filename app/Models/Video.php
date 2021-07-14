@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Lesson;
+use App\Scopes\OrdinalScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
