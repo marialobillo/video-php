@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\User;
 use Tests\TestCase;
 use App\Models\Coupon;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -17,7 +19,6 @@ class CouponControllerTest extends TestCase
      */
     public function it_store_coupon_and_redirect()
     {
-        $this->withoutExceptionHandling();
 
         // need a coupon in the database
         $coupon = Coupon::factory()->create();
@@ -30,7 +31,7 @@ class CouponControllerTest extends TestCase
         // $response->assertSessionHas('coupon_id', $coupon->id);
     }
 
-    
+
 
      /**
      *
@@ -38,6 +39,8 @@ class CouponControllerTest extends TestCase
      */
     public function it_does_not_store_coupon_for_invalid_code()
     {
+
+
         $response = $this->get('/promotions/invalid-code');
 
         $response->assertRedirect('/#buy-now');
@@ -67,9 +70,14 @@ class CouponControllerTest extends TestCase
      */
     public function it_does_not_store_a_previously_used_coupon()
     {
-        $this->markTestIncomplete();
+        $user = User::factory()->create();
+        $coupon = Coupon::factory()->create();
+        $order = Order::factory()->create([
+            'user_id' => $user->id,
 
-        $response = $this->get('/promotions/previously-used-code');
+        ]);
+
+        $response = $this->actingAs($user)->get('/promotions/' . $coupon->id);
 
         $response->assertRedirect('/#buy-now');
         $response->assertSessionMissing('coupon_id');
