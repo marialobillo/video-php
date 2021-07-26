@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(Lesson::class, function (Faker $faker) {
     return [
         'name' => $faker->words(2, true),
-        'ordinal' => $faker->randomDigitNotNull,
-        'product_id' => null,
+        'ordinal' => $this->faker->randomDigitNotNull,
+        'product_id' => $this->facker->randomNumber(),
     ];
 });
